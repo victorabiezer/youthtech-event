@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="ColorStack @ UTRGV presents YouthTech — cloud computing, AI & agentic tech ft. Amazon Web Services. March 27, 2026. Free event, open to all UTRGV students."/>
+<meta property="og:title" content="YouthTech Event — ColorStack @ UTRGV"/>
+<meta property="og:description" content="Cloud · AI/ML · Kahoot · Workshop · Employee Panel · Free food. March 27 · 1–5PM CST · Edinburg, TX"/>
+<title>YouthTech · ColorStack @ UTRGV</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #FF4500; --blue: #3b82f6; --purple: #a855f7;
+    --yellow: #facc15; --green: #22c55e; --pink: #ec4899;
+    --bg: #07090f; --bg3: #111827; --aws: #FF9900;
+    --text: #f1f5f9; --muted: rgba(255,255,255,0.45); --subtle: rgba(255,255,255,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  .bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+  .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; }
+  .orb1 { width: 600px; height: 600px; background: radial-gradient(circle, #FF450015 0%, transparent 65%); top: -200px; right: -150px; }
+  .orb2 { width: 500px; height: 500px; background: radial-gradient(circle, #3b82f615 0%, transparent 65%); bottom: 0; left: -150px; }
+  .orb3 { width: 400px; height: 400px; background: radial-gradient(circle, #a855f712 0%, transparent 65%); top: 40%; right: 10%; }
+
+  .wrap { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid var(--subtle); }
+  .nav-org { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .nav-org span { color: var(--orange); }
+  .aws-badge { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; background: var(--aws); color: #000; padding: 5px 12px; border-radius: 4px; letter-spacing: 0.5px; }
+
+  .rainbow { height: 3px; display: flex; gap: 3px; margin-bottom: 56px; animation: fadeIn 1s ease both; }
+  .rainbow span { flex: 1; border-radius: 2px; }
+
+  .hero { margin-bottom: 56px; }
+  .hero-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; animation: slideUp 0.7s ease both; }
+  .hero-title { font-size: clamp(72px, 14vw, 116px); font-weight: 800; line-height: 0.85; letter-spacing: -3px; text-transform: uppercase; margin-bottom: 20px; animation: slideUp 0.8s ease both; }
+  .hero-title .w { color: #fff; display: block; }
+  .hero-title .g { display: block; background: linear-gradient(90deg, var(--orange) 0%, var(--purple) 50%, var(--blue) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 520px; animation: slideUp 0.9s ease both; }
+
+  .meta-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 56px; animation: slideUp 1s ease both; }
+  .meta-card { padding: 18px 20px; border-radius: 10px; border: 1px solid; transition: transform 0.2s; }
+  .meta-card:hover { transform: translateY(-2px); }
+  .mc-date { background: #FF450010; border-color: #FF450030; }
+  .mc-time { background: #a855f710; border-color: #a855f730; }
+  .mc-room { background: #3b82f610; border-color: #3b82f630; }
+  .mc-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .mc-date .mc-label { color: #FF450088; } .mc-time .mc-label { color: #a855f788; } .mc-room .mc-label { color: #3b82f688; }
+  .mc-val { font-size: 22px; font-weight: 800; font-family: 'Syne', sans-serif; }
+  .mc-date .mc-val { color: var(--orange); }
+  .mc-time .mc-val { color: #c084fc; }
+  .mc-room .mc-val { color: #60a5fa; }
+
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .sec-head-line { flex: 1; height: 1px; background: var(--subtle); }
+  .sec-head-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; white-space: nowrap; }
+
+  .topics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 56px; }
+  .topic-card { background: var(--subtle); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px; transition: background 0.2s, transform 0.2s; }
+  .topic-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-2px); }
+  .topic-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .topic-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .topic-desc { font-size: 12px; color: var(--muted); line-height: 1.5; font-family: 'JetBrains Mono', monospace; }
+
+  .schedule { margin-bottom: 56px; }
+  .sched-item { display: flex; gap: 20px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid var(--subtle); }
+  .sched-item:last-child { border-bottom: none; }
+  .sched-left { min-width: 100px; flex-shrink: 0; }
+  .sched-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+  .sched-dur { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.2); margin-top: 3px; }
+  .sched-bar { width: 2px; border-radius: 2px; flex-shrink: 0; align-self: stretch; min-height: 24px; }
+  .sched-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .sched-detail { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; line-height: 1.5; }
+  .sched-owner { font-size: 11px; color: rgba(255,255,255,0.28); font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+  .sched-chip { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 6px; }
+
+  .workshop-card { background: var(--bg3); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 32px; margin-bottom: 56px; position: relative; overflow: hidden; }
+  .workshop-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 50%, #22c55e0a 0%, transparent 60%); pointer-events: none; }
+  .workshop-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .workshop-icon { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+  .workshop-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px; }
+  .workshop-title { font-size: 18px; font-weight: 800; }
+  .workshop-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+  .workshop-builds { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .wb { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.15); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: rgba(255,255,255,0.7); font-family: 'JetBrains Mono', monospace; line-height: 1.5; }
+  .wb strong { color: var(--green); display: block; font-size: 11px; margin-bottom: 2px; }
+
+  .audience { background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px 32px; margin-bottom: 56px; display: flex; gap: 28px; align-items: flex-start; }
+  .audience-icon { width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .audience-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .audience-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .audience-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .atag { font-family: 'JetBrains Mono', monospace; font-size: 10px; background: var(--subtle); color: var(--muted); padding: 3px 10px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.08); }
+
+  .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 56px; }
+  .perk { text-align: center; padding: 24px 16px; background: var(--subtle); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; transition: transform 0.2s; }
+  .perk:hover { transform: translateY(-3px); }
+  .perk-icon { width: 36px; height: 36px; border-radius: 50%; margin: 0 auto 12px; }
+  .perk-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+  .perk-desc { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; line-height: 1.4; }
+  .dot-icon { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+
+  .cta { text-align: center; padding: 52px 32px; background: var(--bg3); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; position: relative; overflow: hidden; }
+  .cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, #FF450018 0%, transparent 60%); pointer-events: none; }
+  .cta-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .cta-title { font-size: 34px; font-weight: 800; margin-bottom: 10px; }
+  .cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
+  .cta-btn { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; background: linear-gradient(90deg, var(--orange), var(--purple)); color: #fff; padding: 15px 40px; border-radius: 8px; transition: opacity 0.2s, transform 0.2s; }
+  .cta-btn:hover { opacity: 0.88; transform: scale(1.03); }
+  .cta-free { margin-top: 16px; font-size: 12px; color: var(--green); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; }
+
+  footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .foot-org { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+  .foot-contact { font-size: 11px; color: var(--muted); }
+  .foot-contact a { color: var(--blue); text-decoration: none; }
+  .foot-contact a:hover { text-decoration: underline; }
+
+  @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 600px) {
+    .meta-strip, .topics { grid-template-columns: 1fr; }
+    .perks { grid-template-columns: 1fr 1fr; }
+    .audience { flex-direction: column; gap: 16px; }
+    .workshop-builds { grid-template-columns: 1fr; }
+    .hero-title { letter-spacing: -2px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<div class="wrap">
+
+  <nav>
+    <div class="nav-org">ColorStack <span>@</span> UTRGV</div>
+    <div class="aws-badge">ft. AWS</div>
+  </nav>
+
+  <div class="rainbow" style="margin-top:0;">
+    <span style="background:#FF4500;"></span><span style="background:#f97316;"></span>
+    <span style="background:#facc15;"></span><span style="background:#22c55e;"></span>
+    <span style="background:#3b82f6;"></span><span style="background:#a855f7;"></span>
+    <span style="background:#ec4899;"></span>
+  </div>
+
+  <section class="hero">
+    <div class="hero-label">// 03.27.2026 &nbsp;·&nbsp; 1 PM – 5 PM CST &nbsp;·&nbsp; Edinburg, TX</div>
+    <div class="hero-title">
+      <span class="w">Youth</span>
+      <span class="g">Tech</span>
+    </div>
+    <p class="hero-sub">An interactive introduction to cloud computing, AI, and agentic technology — powered by Amazon Web Services. Open to all UTRGV students, no experience needed.</p>
+  </section>
+
+  <div class="meta-strip">
+    <div class="meta-card mc-date">
+      <div class="mc-label">Date</div>
+      <div class="mc-val">Mar 27, 2026</div>
+    </div>
+    <div class="meta-card mc-time">
+      <div class="mc-label">Time</div>
+      <div class="mc-val">1 – 5 PM CST</div>
+    </div>
+    <div class="meta-card mc-room">
+      <div class="mc-label">Location</div>
+      <div class="mc-val">EIEAB 1.212</div>
+    </div>
+  </div>
+
+  <!-- WHAT YOU'LL EXPERIENCE -->
+  <div class="sec-head">
+    <div class="sec-head-label">What you'll experience</div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="topics">
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--blue);"></div>
+      <div>
+        <div class="topic-name" style="color:#60a5fa;">Cloud Fundamentals</div>
+        <div class="topic-desc">AWS-led presentation on how cloud computing works and why it matters in industry today</div>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--purple);"></div>
+      <div>
+        <div class="topic-name" style="color:#c084fc;">AI / ML Presentation</div>
+        <div class="topic-desc">Deep dive into artificial intelligence and machine learning with real-world AWS examples</div>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--yellow);"></div>
+      <div>
+        <div class="topic-name" style="color:var(--yellow);">Kahoot Challenge</div>
+        <div class="topic-desc">Tech trivia battle on cloud & AI concepts — compete with your peers for prizes</div>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--green);"></div>
+      <div>
+        <div class="topic-name" style="color:var(--green);">Hands-on Workshop</div>
+        <div class="topic-desc">Build an AI agent using Kiro CLI and MCP servers — guided step by step, no experience needed</div>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--pink);"></div>
+      <div>
+        <div class="topic-name" style="color:var(--pink);">Employee Panel</div>
+        <div class="topic-desc">AWS professionals share their career journeys and answer your questions about tech careers</div>
+      </div>
+    </div>
+    <div class="topic-card">
+      <div class="topic-dot" style="background:var(--orange);"></div>
+      <div>
+        <div class="topic-name" style="color:var(--orange);">Networking + Food</div>
+        <div class="topic-desc">Connect with AWS reps and fellow students — free food provided for all attendees</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL AGENDA -->
+  <div class="sec-head">
+    <div class="sec-head-label">Full agenda</div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="schedule">
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">1:00 – 1:10 PM</div><div class="sched-dur">10 min</div></div>
+      <div class="sched-bar" style="background:var(--orange);"></div>
+      <div>
+        <div class="sched-name">Introductions</div>
+        <div class="sched-detail">Welcome from ColorStack @ UTRGV and the AWS team</div>
+        <span class="sched-chip" style="color:var(--orange);background:#FF450015;border:1px solid #FF450030;">Opening</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">1:10 – 1:35 PM</div><div class="sched-dur">25 min</div></div>
+      <div class="sched-bar" style="background:var(--blue);"></div>
+      <div>
+        <div class="sched-name">Cloud Fundamentals</div>
+        <div class="sched-detail">AWS-led session on cloud computing core concepts and services</div>
+        <div class="sched-owner">↳ Poojitha Aedira (AWS)</div>
+        <span class="sched-chip" style="color:#60a5fa;background:#3b82f615;border:1px solid #3b82f630;">Presentation</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">1:35 – 1:50 PM</div><div class="sched-dur">15 min</div></div>
+      <div class="sched-bar" style="background:rgba(255,255,255,0.12);"></div>
+      <div>
+        <div class="sched-name" style="color:var(--muted);">Break</div>
+        <div class="sched-detail">Grab a snack, take a breather</div>
+        <span class="sched-chip" style="color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">Break</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">1:50 – 2:10 PM</div><div class="sched-dur">30 min</div></div>
+      <div class="sched-bar" style="background:var(--purple);"></div>
+      <div>
+        <div class="sched-name">AI / ML Presentation</div>
+        <div class="sched-detail">Artificial intelligence and machine learning with real AWS applications</div>
+        <div class="sched-owner">↳ Favour Ezeugwa (AWS)</div>
+        <span class="sched-chip" style="color:#c084fc;background:#a855f715;border:1px solid #a855f730;">Presentation</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">2:10 – 2:25 PM</div><div class="sched-dur">10 min</div></div>
+      <div class="sched-bar" style="background:var(--yellow);"></div>
+      <div>
+        <div class="sched-name">Kahoot Challenge</div>
+        <div class="sched-detail">Cloud & AI tech trivia — see who's been paying attention</div>
+        <span class="sched-chip" style="color:var(--yellow);background:#facc1515;border:1px solid #facc1530;">Challenge</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">2:35 – 3:50 PM</div><div class="sched-dur">80 min</div></div>
+      <div class="sched-bar" style="background:var(--green);"></div>
+      <div>
+        <div class="sched-name">Hands-on Workshop</div>
+        <div class="sched-detail">Build an AI Certification Prep Tool using Kiro CLI, AI Agents & MCP servers</div>
+        <div class="sched-owner">↳ Kavya Sidda (AWS)</div>
+        <span class="sched-chip" style="color:var(--green);background:#22c55e15;border:1px solid #22c55e30;">Workshop · 80 min</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">3:50 – 4:50 PM</div><div class="sched-dur">60 min</div></div>
+      <div class="sched-bar" style="background:var(--pink);"></div>
+      <div>
+        <div class="sched-name">AWS Employee Panel</div>
+        <div class="sched-detail">Q&A with AWS professionals — careers, advice, how to break into tech</div>
+        <span class="sched-chip" style="color:var(--pink);background:#ec489915;border:1px solid #ec489930;">Panel</span>
+      </div>
+    </div>
+
+    <div class="sched-item">
+      <div class="sched-left"><div class="sched-time">4:50 – 4:55 PM</div><div class="sched-dur">5 min</div></div>
+      <div class="sched-bar" style="background:var(--orange);"></div>
+      <div>
+        <div class="sched-name">Closing</div>
+        <div class="sched-detail">Final words, thank you, and stick around for networking & food</div>
+        <span class="sched-chip" style="color:var(--orange);background:#FF450015;border:1px solid #FF450030;">Closing</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WORKSHOP SPOTLIGHT -->
+  <div class="sec-head">
+    <div class="sec-head-label">Workshop spotlight</div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="workshop-card">
+    <div class="workshop-header">
+      <div class="workshop-icon" style="background:var(--green);"></div>
+      <div>
+        <div class="workshop-eyebrow">80-min hands-on lab · Led by AWS</div>
+        <div class="workshop-title">Building AI Agents with Kiro CLI &amp; MCPs</div>
+      </div>
+    </div>
+    <p class="workshop-desc">You'll build an <strong>AWS Certification Prep Tool</strong> — a real intelligent study assistant powered by AI Agents, Kiro CLI, and Model Context Protocol (MCP) servers. This is advanced agentic AI development made beginner-accessible. No prior experience required.</p>
+    <div class="workshop-builds">
+      <div class="wb"><strong>AI Agents</strong>Autonomous systems that reason, plan & execute complex tasks</div>
+      <div class="wb"><strong>Kiro CLI</strong>AWS's tool for rapid AI app development with minimal code</div>
+      <div class="wb"><strong>MCP Servers</strong>Connect AI to live AWS docs, APIs & data in real-time</div>
+      <div class="wb"><strong>What you'll build</strong>Generate practice Qs · Explain concepts · Access live AWS docs</div>
+    </div>
+  </div>
+
+  <!-- WHO IS THIS FOR -->
+  <div class="sec-head" style="margin-top:56px;">
+    <div class="sec-head-label">Who should come</div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="audience">
+    <div class="audience-icon" style="background:var(--orange);"></div>
+    <div>
+      <div class="audience-title">Open to ALL UTRGV students</div>
+      <div class="audience-desc">No experience needed. Whether you've never touched a line of code or you're already building apps — this event is designed for everyone curious about tech and cloud careers.</div>
+      <div class="audience-tags">
+        <span class="atag">CS students</span><span class="atag">Engineering</span>
+        <span class="atag">Business</span><span class="atag">First-gen</span>
+        <span class="atag">Beginners welcome</span><span class="atag">All majors</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERKS -->
+  <div class="sec-head">
+    <div class="sec-head-label">Event perks</div>
+    <div class="sec-head-line"></div>
+  </div>
+  <div class="perks">
+    <div class="perk"><div class="perk-icon" style="background:var(--orange);"></div><div class="perk-title">Free Food</div><div class="perk-desc">Provided for all attendees</div></div>
+    <div class="perk"><div class="perk-icon" style="background:var(--yellow);"></div><div class="perk-title">Kahoot Prizes</div><div class="perk-desc">Win for knowing your tech</div></div>
+    <div class="perk"><div class="perk-icon" style="background:var(--green);"></div><div class="perk-title">AWS Network</div><div class="perk-desc">Real industry connections</div></div>
+    <div class="perk"><div class="perk-icon" style="background:var(--blue);"></div><div class="perk-title">Hands-on Build</div><div class="perk-desc">Leave with real experience</div></div>
+    <div class="perk"><div class="perk-icon" style="background:var(--purple);"></div><div class="perk-title">Career Insights</div><div class="perk-desc">Learn paths into tech</div></div>
+    <div class="perk"><div class="perk-icon" style="background:var(--pink);"></div><div class="perk-title">100% Free</div><div class="perk-desc">Open to all students</div></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-label">// Don't miss it — spots are limited</div>
+    <div class="cta-title">Reserve your spot</div>
+    <p class="cta-sub">Friday, March 27 · 1–5 PM CST<br>EIEAB 1.212 · UTRGV Edinburg · Free food included</p>
+    <a href="https://pulse.aws/survey/CN26391N" class="cta-btn" target="_blank" rel="noopener">RSVP Now →</a>
+    <div class="cta-free">✦ Free event · Open to all UTRGV students</div>
+  </div>
+
+  <footer>
+    <div class="foot-org">ColorStack @ UTRGV &nbsp;·&nbsp; YouthTech 2026</div>
+    <div class="foot-contact">Questions or accommodations? <a href="mailto:viviana.ayala01@utrgv.edu">viviana.ayala01@utrgv.edu</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
